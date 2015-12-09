@@ -29,58 +29,40 @@ public class RealEstateMysqlImpl extends AbstractDataBaseAccessObject implements
 
 	@Override
 	public void createTable() throws DataStoreManagerException {
-		StringBuilder sb = new StringBuilder("CREATE TABLE PAGES ");
+		StringBuilder sb = new StringBuilder("CREATE TABLE REAL_ESTATE ");
 		sb.append('(');
-		sb.append("PROTOCOL         VARCHAR(6)   NOT NULL,");
-		sb.append("HOSTNAME         VARCHAR(255) NOT NULL,");
-		sb.append("H_PATH           INT          NOT NULL,");
-		sb.append("H_PARAM          INT          NOT NULL,");
-		sb.append("FILEID           CHAR(64)     NOT NULL,");
-		sb.append("TIMEID           BIGINT(8)    NOT NULL,");
-		sb.append("PATH             LONGBLOB,");
-		sb.append("PATH_COUNT       INT,");
-		sb.append("PARAMETER        LONGBLOB,");
-		sb.append("PARAMETER_COUNT  INT,");
-		sb.append("REQUEST_HEADER   LONGBLOB,");
-		sb.append("RESPONCE_HEADER  LONGBLOB,");
-		sb.append("HTTP_STATUS_CODE CHAR(3),");
-		sb.append("HTTP_VERSION     CHAR(3),");
-		sb.append("CREATE_DATE      DATETIME, ");
-		sb.append("UPDATE_DATE      DATETIME, ");
-		sb.append("PRIMARY KEY(PROTOCOL, HOSTNAME, H_PATH, H_PARAM, FILEID, TIMEID))");
+		sb.append("HASH               VARCHAR(128)  NOT NULL,");
+		sb.append("URL                VARCHAR(512),");
+		sb.append("AMOUNT             INT          ,");
+		sb.append("FLOOR_PLANS        VARCHAR(128) ,");
+		sb.append("BUILDING_AREA      VARCHAR(128) ,");
+		sb.append("LAND_AREA          VARCHAR(128) ,");
+		sb.append("BUILDING_COVERAGE  VARCHAR(128) ,");
+		sb.append("FLOOR_AREA_RATIO   VARCHAR(128) ,");
+		sb.append("TIME_OF_COMPLETION VARCHAR(128) ,");
+		sb.append("STRUCTURE          VARCHAR(128) ,");
+		sb.append("CREATE_DATE        DATETIME, ");
+		sb.append("UPDATE_DATE        DATETIME, ");
+		sb.append("PRIMARY KEY(HASH, URL))");
 		Sql sql = new Sql(sb.toString());
 		this.createTable(sql);
 	}
 	
 	@Override
 	public void dropTable() throws DataStoreManagerException {
-		StringBuilder sb = new StringBuilder("DROP TABLE PAGES ");
+		StringBuilder sb = new StringBuilder("DROP TABLE REAL_ESTATE ");
 		Sql sql = new Sql(sb.toString());
 		this.dropTable(sql);
 	}
 
 	@Override
-	public List<RealEstateRecord> select(String protcol, String host,
-			List<String> path, Map<String, String> parameter)
-			throws DataStoreManagerException {
+	public List<RealEstateRecord> select(String hash) throws DataStoreManagerException {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public RealEstateRecord select(String protcol, String host,
-			List<String> path, Map<String, String> parameter, String fileId,
-			long timeId) throws DataStoreManagerException {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public void insert(String protcol, String host, List<String> path,
-			Map<String, String> parameter, Map<String, String> requestHeader,
-			Map<String, List<String>> responceHeader, String httpStatusCode,
-			String httpVersion, String fileid, long timeid, Date createDate,
-			Date updateDate) throws DataStoreManagerException {
+	public void insert(String hash,String url,int amount,String floorPlans,String buildingArea,String landArea,String buildingCoverage,String floorAreaRatio,String timeOfCompletion,String structure,Date createDate,Date updateDate) throws DataStoreManagerException {
 		// TODO Auto-generated method stub
 		
 	}

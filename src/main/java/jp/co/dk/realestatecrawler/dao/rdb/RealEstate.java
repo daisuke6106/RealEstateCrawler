@@ -9,7 +9,7 @@ import jp.co.dk.datastoremanager.exception.DataStoreManagerException;
 import jp.co.dk.realestatecrawler.dao.rdb.record.RealEstateRecord;
 
 /**
- * Pagesは、PAGESテーブルに対しての制御を行うDAOインスタンスが実装するインターフェース。
+ * RealEstateは、REAL_ESTATEテーブルに対しての制御を行うDAOインスタンスが実装するインターフェース。
  * 
  * @version 1.0
  * @author D.Kanno
@@ -17,7 +17,7 @@ import jp.co.dk.realestatecrawler.dao.rdb.record.RealEstateRecord;
 public interface RealEstate extends DataAccessObject{
 	
 	/**
-	 * PAGESテーブルを作成する。<p/>
+	 * REAL_ESTATEテーブルを作成する。<p/>
 	 * テーブル作成に失敗した場合、例外が送出される。
 	 * 
 	 * @throws DataStoreManagerException テーブル作成に失敗した場合
@@ -25,7 +25,7 @@ public interface RealEstate extends DataAccessObject{
 	public void createTable() throws DataStoreManagerException;
 
 	/**
-	 * PAGESテーブルを削除する。<p/>
+	 * REAL_ESTATEテーブルを削除する。<p/>
 	 * テーブル削除に失敗した場合、例外が送出される。
 	 * 
 	 * @throws DataStoreManagerException テーブル作成に失敗した場合
@@ -33,7 +33,7 @@ public interface RealEstate extends DataAccessObject{
 	public void dropTable() throws DataStoreManagerException;
 	
 	/**
-	 * PAGESテーブルから指定の条件に合致するレコードを取得する。
+	 * REAL_ESTATEテーブルから指定の条件に合致するレコードを取得する。
 	 * 
 	 * @param protocol  プロトコル名
 	 * @param hostname  ホスト名
@@ -41,42 +41,26 @@ public interface RealEstate extends DataAccessObject{
 	 * @param parameter パラメータのハッシュ値
 	 * @return 取得したレコードオブジェクトの一覧
 	 */
-	public List<RealEstateRecord> select(String protcol, String host, List<String> path, Map<String, String> parameter) throws DataStoreManagerException ;
+	public List<RealEstateRecord> select(String hash) throws DataStoreManagerException ;
 	
 	/**
-	 * PAGESテーブルから指定の条件に合致するレコードを取得する。
-	 * 
-	 * @param protocol  プロトコル名
-	 * @param hostname  ホスト名
-	 * @param path      パスのハッシュ値
-	 * @param parameter パラメータのハッシュ値
-	 * @param fileId    ファイルID
-	 * @param timeId    タイムID
-	 * @return 取得したレコードオブジェクト
-	 */
-	public RealEstateRecord select(String protcol, String host, List<String> path, Map<String, String> parameter, String fileId, long timeId) throws DataStoreManagerException ;
-	
-	/**
-	 * PAGESテーブルから指定の１レコードを登録する。<p/>
+	 * REAL_ESTATEテーブルから指定の１レコードを登録する。<p/>
 	 * 必須パラメータが設定されていない場合、例外を送出します。<br/>
-	 * <br/>
-	 * pathと、parameterに限り設定されていない場合（nullの場合）、空のリスト、マップインスタンスで置き換えます。<br/>
 	 * 
-	 * @param protcol        プロトコル文字列（必須）
-	 * @param host           ホスト名（必須）
-	 * @param path           パスリスト（設定されていない場合、空のリストで置き換え）
-	 * @param parameter      パラメータマップ（設定されていない場合、空のマップで置き換え）
-	 * @param requestHeader  リクエストヘッダ
-	 * @param responceHeader レスポンスヘッダ
-	 * @param httpStatusCode HTTPステータスコード
-	 * @param httpVersion    HTTPバージョン
-	 * @param fileid         ファイルID
-	 * @param timeid         タイムID
-	 * @param createDate     登録日付
-	 * @param updateDate     更新日付
+	 * @param hash ハッシュ
+	 * @param url URL
+	 * @param amount 金額
+	 * @param floorPlans 間取り
+	 * @param buildingArea 建物面積
+	 * @param landArea 土地面積
+	 * @param buildingCoverage 建ぺい率
+	 * @param floorAreaRatio 容積率
+	 * @param timeOfCompletion 完成時期
+	 * @param structure 構造・工法
+	 * @param createDate 作成日時
+	 * @param updateDate 更新日時
 	 * @throws DataStoreManagerException 登録に失敗した場合
-	 * @throws CrawlerException          必須パラメータが設定されていない場合
 	 */
-	public void insert(String protcol, String host, List<String> path, Map<String, String> parameter, Map<String, String> requestHeader, Map<String, List<String>> responceHeader, String httpStatusCode, String httpVersion, String fileid, long timeid, Date createDate, Date updateDate) throws DataStoreManagerException ;
+	public void insert(String hash,String url,int amount,String floorPlans,String buildingArea,String landArea,String buildingCoverage,String floorAreaRatio,String timeOfCompletion,String structure,Date createDate,Date updateDate) throws DataStoreManagerException ;
 	
 }
